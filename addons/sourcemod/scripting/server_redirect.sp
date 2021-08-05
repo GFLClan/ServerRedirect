@@ -16,7 +16,7 @@
 #include "glib/convarutils"
 #undef OVERRIDE_DEFAULT
 
-#define SNAME "[Server Redirect] "
+#define SNAME "\x01[\x0CGFL\x01] "
 #define SERVER_REDIRECT_CFG "configs/server_redirect.cfg"
 
 #include "server_redirect/net.sp"
@@ -486,7 +486,7 @@ void AdvertiseServer(ServerEntry se)
 		if(gSocketAvaliable)
 		{
 			Format(buff, sizeof(buff), "%T", "servers_menu_server_entry_slots_count", i, (se.curr_players == 0 ? se.curr_players_info : se.curr_players), se.maxplayers);
-			PrintToChatColored(i, "%t", "server_advertisement_server_name", se.display_name);
+			PrintToChatColored(i, "%t", "server_advertisement_server_name", TrimServerName(se.display_name));
 			PrintToChatColored(i, "%t", "server_advertisement_server_stats", buff, se.GetDisplayIP());
 		}
 		else
@@ -712,9 +712,9 @@ public int ServerInfo_Menu(Menu menu, MenuAction action, int param1, int param2)
 				map = GetTrueMapName(se.map);
 			
 			if(!gSocketAvaliable)
-				menu.SetTitle("%T\n ", "servinfo_menu_title_no_socket", param1, se.display_name, se.GetDisplayIP());
+				menu.SetTitle("%T\n ", "servinfo_menu_title_no_socket", param1, TrimServerName(se.display_name), se.GetDisplayIP());
 			else if(gShowPlayerInfo.BoolValue)
-				menu.SetTitle("%T\n ", "servinfo_menu_title", param1, se.display_name, se.GetDisplayIP(), map);
+				menu.SetTitle("%T\n ", "servinfo_menu_title", param1, TrimServerName(se.display_name), se.GetDisplayIP(), map);
 			else
 			{
 				char buff[32];
@@ -722,7 +722,7 @@ public int ServerInfo_Menu(Menu menu, MenuAction action, int param1, int param2)
 					Format(buff, sizeof(buff), "%T", "servers_menu_server_entry_slots_count", param1, (se.curr_players == 0 ? se.curr_players_info : se.curr_players), se.maxplayers);
 				else
 					Format(buff, sizeof(buff), "%T", "servers_menu_server_entry_not_available", param1);
-				menu.SetTitle("%T\n ", "servinfo_menu_title_no_player_info", param1, se.display_name, se.GetDisplayIP(), map, buff);
+				menu.SetTitle("%T\n ", "servinfo_menu_title_no_player_info", param1, TrimServerName(se.display_name), se.GetDisplayIP(), map, buff);
 			}
 			
 			gActiveMenu[param1] = menu;
@@ -1169,11 +1169,20 @@ stock char[] GetTrueMapName(const char fullmap[PLATFORM_MAX_PATH])
 
 stock char[] TrimServerName(const char servername[sizeof(ServerEntry::display_name)])
 {
-	if(gServersMenuServerNameLength.IntValue == 0)
-		return servername;
-	
 	char name[sizeof(ServerEntry::display_name)];
-	
+	if (FindCharInString(servername, '|', false) > 1)
+	{
+		SplitString(servername, "|", name, sizeof(name));
+	}
+
+	else
+	{
+		FormatEx(name, sizeof(name), servername);
+	}
+
+	if(gServersMenuServerNameLength.IntValue == 0)
+		return name;
+
 	int count, finallen;
 	for(int i = 0; servername[i]; i++)
 	{

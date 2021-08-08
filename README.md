@@ -1,6 +1,9 @@
 # ServerRedirect
 SourceMod plugin that allows players to see and connect to other servers. **Customized to fit GFL's needs as an upgrade to the previous ServerHop plugin.**
 
+## To-Do
+> - Global server list config hosted on an API or DB Table.
+
 ## About
 This plugin provides servers list menu, where you can add your servers, so players can be redirected to them while being on server. You can redirect to **any** server you'd like, servers you redirect to **doesn't require any fixes installed** or anything like that. Also this plugin comes with A2S queries, but to actually use it you would need an optional requirement (see **Requirements**), after that you'll see real time statistics for every server you added. This plugin also provides some api (``addons/sourcemod/scripting/include/server_redirect.inc``) that you can use for your needs.
 

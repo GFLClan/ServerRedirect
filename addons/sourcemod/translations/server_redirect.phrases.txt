@@ -21,7 +21,7 @@
 
 	"command_spam_attempt"
 	{
-		"en"		"[GFL] Please wait a few seconds before you can use this command again."
+		"en"		"{D}[{B}GFL{D}] Please wait a few seconds before you can use this command again."
 	}
 
 	"servers_menu_title"
@@ -136,31 +136,31 @@
 	"server_info"
 	{
 		"#format"	"{1:s},{2:s}"
-		"en"		"[GFL] {1}\n[Server Redirect] Connect command: connect {2}"
+		"en"		"{D}[{B}GFL{D}] {1}\n[Server Redirect] Connect command: connect {2}"
 	}
 
 	"server_advertisement_server_name"
 	{
 		"#format"	"{1:s}"
-		"en"		"[GFL] {g}{1}"
+		"en"		"{D}[{B}GFL{D}] {g}{1}"
 	}
 
 	"server_advertisement_server_stats"
 	{
 		"#format"	"{1:s},{2:s}"
-		"en"		"\x01[\x0CGFL\x01] Players: {lg}{1}{d} | Server ip: {lg}{2}"
+		"en"		"{D}[{B}GFL{D}] Players: {lg}{1}{d} | Server ip: {lg}{2}"
 	}
 
 	"server_advertisement_no_socket_server_name"
 	{
 		"#format"	"{1:s}"
-		"en"		"\x01[\x0CGFL\x01] {g}{1}"
+		"en"		"{D}[{B}GFL{D}] {g}{1}"
 	}
 
 	"server_advertisement_no_socket_server_stats"
 	{
 		"#format"	"{1:s}"
-		"en"		"\x01[\x0CGFL\x01] Server ip: {lg}{1}"
+		"en"		"{D}[{B}GFL{D}] Server ip: {lg}{1}"
 	}
 
 	"confirmation_menu_title"
@@ -182,6 +182,6 @@
 	"server_advertisement_leave"
 	{
 		"#format"	"{1:N},{2:s}"
-		"en"		"\x01[\x0CGFL\x01] {lo}{1}{d} is joining {lg}{2}{d}. Type {lg}!servers{d} to follow them!"
+		"en"		"{D}[{B}GFL{D}] {lo}{1}{d} is joining {lg}{2}{d}. Type {lg}!servers{d} to follow them!"
 	}
 }
